@@ -6,6 +6,7 @@ def test_function():
 
 
 test_function()
+# print(globals())
 # inner_function()
 """
 File "C:\PycharmProjects\PythonMirOn\Gala_Py\module_4_2.py", line 9, in <module>
