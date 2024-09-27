@@ -120,6 +120,12 @@ class Cube(Figure):
         rebro_list = super().__sides__(sides)
         super().__init__(color, rebro_list)
 
+    def volume(self):
+        sides = super().get_sides()
+        volume = sides[0]**3
+        # print('volume ', sides, volume)
+        return volume
+
 
 
 
@@ -152,10 +158,12 @@ cube1 = Cube((222, 35, 130), 6, 7, 8)
 print(vars(cube1))
 print(cube1.get_sides())
 print(len(cube1))
+print(cube1.volume())
 
 cube1 = Cube((222, 35, 130), 4)
 print(vars(cube1))
 print(cube1.get_sides())
 print(len(cube1))
+print(cube1.volume())
 # print(dir(cube1))
 # print(vars(cube1))
