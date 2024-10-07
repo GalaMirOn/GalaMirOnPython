@@ -1,6 +1,8 @@
-from threading import Thread
+from threading import Thread, Lock
+
 import time
 
+lock = Lock()
 class Knight(Thread):
 
     def __init__(self, name, power, *args, **kwargs):
@@ -19,10 +21,12 @@ class Knight(Thread):
             time.sleep(1)
             self.vragi = self.vragi - self.power
             if self.vragi > 0:
-                print(f"{self.name} сражается {i + 1}-й день, осталось {self.vragi} воинов")
+                with lock:
+                    print(f"{self.name} сражается {i + 1}-й день, осталось {self.vragi} воинов")
             else:
-                print(f"{self.name} сражается {i + 1}-й день, осталось 0 воинов")
-                print(f"{self.name} одержал победу спустя {i + 1} дней!")
+                with lock:
+                    print(f"{self.name} сражается {i + 1}-й день, осталось 0 воинов")
+                    print(f"{self.name} одержал победу спустя {i + 1} дней!")
 
 
 knight_1 = Knight('Sir Lancelot', 10)
@@ -40,4 +44,4 @@ knight_2.join()
 knight_3.join()
 knight_4.join()
 
-print('Все битвы закончились!')
+print('Все битвы закончились! УРА, ТОВАРИЩИ!!!')
