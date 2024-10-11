@@ -6,8 +6,8 @@ def write_words(word_count, file_name):
     with open(file_name, 'w', encoding='utf-8') as file:
         for i in range(word_count):
             file.write(f"Прекрасное слово № {i + 1}\n")
-            time.sleep(0.01)
-
+            time.sleep(0.1)
+    print('Завершилась запись в файл:', file.name)
 
 time_start = time.time()
 wr_1 = write_words(10, 'example1.txt')
@@ -28,10 +28,16 @@ wr_5.start()
 wr_6.start()
 wr_7.start()
 wr_8.start()
+
+wr_5.join()
+wr_6.join()
+wr_7.join()
+wr_8.join()
+
 time_end = time.time()
 time_res2 = time_end - time_start
 print('Работа потоков, вариант № 2 ', round(time_res2, 3))
 
 bonus_time = time_res1 / time_res2
-print(f'Использование потоков сокращает время исполнения в данном примере с time.sleep(0.01) в {bonus_time:.2f} раз!')
-print(f'В данном примере без time.sleep(0.01) примерно в 1.7 раз (каждые запуск по разному)')
+print(f'Использование потоков сокращает время исполнения в данном примере с time.sleep(0.1) в {bonus_time:.2f} раз!')
+
