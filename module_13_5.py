@@ -52,9 +52,9 @@ async def send_calories(message, state):
     growth_int = int(data['data_growth'])
     weight_int = int(data['data_weight'])
     # print('Возраст ', age_int,'рост ', growth_int,'вес ', weight_int)
-    calories_men = 10 * weight_int + 6.25 * weight_int - 5 * age_int + 5
+    calories_men = 10 * weight_int + 6.25 * growth_int - 5 * age_int + 5
     await message.answer(f'Рекомендуемое количество калорий для мужчин: {calories_men}')
-    calories_wumen = 10 * weight_int + 6.25 * weight_int - 5 * age_int - 161
+    calories_wumen = 10 * weight_int + 6.25 * growth_int - 5 * age_int - 161
     await message.answer(f'Рекомендуемое количество калорий для женщин: {calories_wumen}')
     await state.finish()
 
