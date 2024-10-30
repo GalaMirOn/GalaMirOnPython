@@ -6,7 +6,7 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import asyncio
 
-api = "" # Токен
+api = "7945501431:AAFiSLBVYJgXjsocCm1XRXDN28KPPrHko0g" # Токен
 bot = Bot(token=api)
 dp = Dispatcher(bot, storage=MemoryStorage())
 kb = InlineKeyboardMarkup(resize_keyboard=True)
@@ -22,13 +22,13 @@ class UserState(StatesGroup):
 
 @dp.message_handler(commands = ['start'])
 async def start_message(message):
-    await message.answer('Привет! Я Бот, помогающий твоему здоровью!', reply_markup=kb)
+    await message.answer(f'Привет, {message.from_user.first_name}! Я Бот, помогающий твоему здоровью!', reply_markup=kb)
 
 
 @dp.callback_query_handler(text = ['formulas'])
 async def set_age(call):
     await call.message.answer('Для мужчин: 10*вес(кг) + 6.25*рост(см) - 5*возраст(г) + 5')
-    await call.message.answer('Для женщин: 10*вес(кг) + 6.25*рост(см) - 5*возраст(г) - 161')
+    await call.message.answer('Для женщин: 10*вес(кг) + 6.25*рост(см) - 5*возраст(г) - 161', reply_markup=kb)
     await call.answer()
 
 @dp.callback_query_handler(text = ['calories'])
@@ -60,7 +60,7 @@ async def send_calories(message, state):
     calories_men = 10 * weight_int + 6.25 * growth_int - 5 * age_int + 5
     await message.answer(f'Рекомендуемое количество калорий для мужчин: {calories_men}')
     calories_wumen = 10 * weight_int + 6.25 * growth_int - 5 * age_int - 161
-    await message.answer(f'Рекомендуемое количество калорий для женщин: {calories_wumen}')
+    await message.answer(f'Рекомендуемое количество калорий для женщин: {calories_wumen}', reply_markup=kb)
     await state.finish()
 
 @dp.message_handler()
